@@ -1,0 +1,98 @@
+.project-page {
+  width: 100%;
+  min-height: 100%;
+  background: #0a0a0a;
+  color: #e8e0d0;
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 48px;
+  overflow-y: auto;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #f0c060;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 48px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+
+.back-btn:hover {
+  opacity: 1;
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+}
+
+.project-image-wrap {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+.project-image {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.project-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.project-title {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #e8e0d0;
+}
+
+.project-year {
+  font-size: 13px;
+  font-weight: 300;
+  color: #888;
+  letter-spacing: 0.06em;
+}
+
+.project-not-found {
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .project-content {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 32px;
+  }
+
+  .project-image-wrap {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .project-meta {
+    flex-direction: column;
+    gap: 8px;
+    min-width: 180px;
+    padding-top: 8px;
+  }
+}
