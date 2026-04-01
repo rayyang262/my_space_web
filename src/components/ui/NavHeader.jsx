@@ -22,7 +22,7 @@ function Tab({ children, href, setPosition }) {
         setPosition({ width, opacity: 1, left: ref.current.offsetLeft })
       }}
       onClick={() => navigate(href)}
-      className="relative z-10 block cursor-pointer px-10 py-3 text-sm font-medium tracking-wide mix-blend-difference text-white"
+      className="relative z-10 block cursor-pointer px-6 py-3 text-sm font-medium tracking-wide mix-blend-difference text-white"
     >
       {children}
     </li>
@@ -44,7 +44,7 @@ export default function NavHeader() {
   return (
     <div className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
       <ul
-        className="pointer-events-auto relative flex w-fit items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md px-8 py-8 shadow-xl gap-12"
+        className="pointer-events-auto relative flex w-[420px] justify-between items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md px-8 py-8 shadow-xl"
         onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
       >
         {TABS.map((tab) => (
