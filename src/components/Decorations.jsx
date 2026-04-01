@@ -115,11 +115,11 @@ export default function Decorations() {
   return (
     <>
       <Rug />
-      <Plant position={[-4.2, 0, 0.8]} />
-      <Plant position={[4.0, 0, 0.8]} />
-      <SleepingCat position={[0.5, 0.01, -0.6]} />
-      <Desk position={[-2.8, 0, -2.0]} />
-      <Chair position={[-2.8, 0, -1.2]} />
+      <Plant position={[-4.2, 2, 0.8]} />
+      <Plant position={[4.0, 2, 0.8]} />
+      <SleepingCat position={[0.5, 2.01, -0.6]} />
+      <Desk position={[-2.8, 2, -2.0]} />
+      <Chair position={[-2.8, 2, -1.2]} />
     </>
   )
 }
