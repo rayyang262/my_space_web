@@ -13,7 +13,10 @@ const HOVER_OFFSET = 0.45    // pop-out distance on hover
 
 const POSITIONS = ROWS.flatMap(y => COLS.map(x => [x, y, WALL_Z]))
 
-function ArtworkPlane({ project, position, onProjectClick }) {
+// Warm muted canvas placeholder colors
+const CANVAS_COLORS = ['#e8d5b7', '#d4b896', '#c9a87a', '#b8956a', '#d9c4a0', '#c4a882']
+
+function ArtworkPlane({ project, position, onProjectClick, index }) {
   const [hovered, setHovered] = useState(false)
   const groupRef = useRef()
 
@@ -38,22 +41,22 @@ function ArtworkPlane({ project, position, onProjectClick }) {
       >
         <planeGeometry args={[ARTWORK_W, ARTWORK_H]} />
         <meshStandardMaterial
-          color={hovered ? '#fff8e7' : '#f5f5f0'}
+          color={hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length]}
           emissive={hovered ? '#f0c060' : '#000000'}
           emissiveIntensity={hovered ? 0.3 : 0}
         />
       </mesh>
 
-      {/* Frame border — local -Z = toward wall */}
+      {/* Gold frame border */}
       <mesh position={[0, 0, -0.008]}>
         <planeGeometry args={[ARTWORK_W + 0.07, ARTWORK_H + 0.07]} />
-        <meshStandardMaterial color={hovered ? '#1a1a1a' : '#2a2a2a'} />
+        <meshStandardMaterial color={hovered ? '#e8c84a' : '#c9a84c'} metalness={0.6} roughness={0.3} />
       </mesh>
 
       {/* Shadow/depth backing */}
       <mesh position={[0, 0, -0.04]}>
         <planeGeometry args={[ARTWORK_W + 0.14, ARTWORK_H + 0.14]} />
-        <meshStandardMaterial color="#111111" transparent opacity={0.35} />
+        <meshStandardMaterial color="#1a1200" transparent opacity={0.4} />
       </mesh>
     </group>
   )
@@ -71,6 +74,7 @@ export default function ArtworkWall({ onProjectClick }) {
             project={project}
             position={pos}
             onProjectClick={onProjectClick}
+            index={i}
           />
         )
       })}

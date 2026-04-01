@@ -9,7 +9,7 @@ const projectByMesh = Object.fromEntries(projects.map((p) => [p.meshName, p]))
 const TARGET_SIZE = 10
 
 export default function StudioModel({ onProjectClick }) {
-  const { scene } = useGLTF('/studio.glb')
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}studio.glb`)
 
   useEffect(() => {
     // Guard on the scene object so HMR remounts don't double-apply

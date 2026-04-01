@@ -3,6 +3,7 @@ import { OrbitControls } from '@react-three/drei'
 import PlaceholderScene from './PlaceholderScene'
 import StudioModel from './StudioModel'
 import ArtworkWall from './ArtworkWall'
+import Decorations from './Decorations'
 
 const USE_GLB = true
 
@@ -18,17 +19,26 @@ function LoadingFallback() {
 export default function Scene({ onProjectClick }) {
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[-5, 8, 2]} intensity={1.2} castShadow />
-      <directionalLight position={[-3, 4, -3]} intensity={0.5} />
-      <pointLight position={[0, 6, -1]} intensity={2.0} color="#fff8f0" />
-      <pointLight position={[0, 4, 0]} intensity={0.8} />
+      {/* Warm cozy ambient */}
+      <ambientLight color="#fff5e0" intensity={0.6} />
+
+      {/* Main directional light */}
+      <directionalLight position={[-5, 8, 2]} intensity={0.9} castShadow color="#ffe8c0" />
+      <directionalLight position={[-3, 4, -3]} intensity={0.4} color="#ffd9a0" />
+
+      {/* Warm amber overhead glow */}
+      <pointLight position={[0, 6, -1]} intensity={2.5} color="#ffb347" />
+
+      {/* Soft fill */}
+      <pointLight position={[0, 4, 0]} intensity={0.7} color="#fff0d0" />
+
+      {/* Desk area atmosphere light */}
+      <pointLight position={[-2.8, 2.5, -2.0]} intensity={0.6} color="#ff9a3c" />
 
       <OrbitControls
         target={[0, 1.5, -3]}
         enablePan={false}
-        minDistance={0.5}
-        maxDistance={18}
+        enableZoom={false}
         enableDamping
         dampingFactor={0.06}
       />
@@ -36,6 +46,7 @@ export default function Scene({ onProjectClick }) {
       <Suspense fallback={<LoadingFallback />}>
         {USE_GLB ? <StudioModel onProjectClick={onProjectClick} /> : <PlaceholderScene onProjectClick={onProjectClick} />}
         {USE_GLB && <ArtworkWall onProjectClick={onProjectClick} />}
+        <Decorations />
       </Suspense>
     </>
   )
