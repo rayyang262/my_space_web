@@ -44,7 +44,7 @@ export default function NavHeader() {
   return (
     <div className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
       <ul
-        className="pointer-events-auto relative flex w-fit items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md p-2 shadow-xl gap-8"
+        className="pointer-events-auto relative flex w-fit items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md p-4 shadow-xl gap-8"
         onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
       >
         {TABS.map((tab) => (
