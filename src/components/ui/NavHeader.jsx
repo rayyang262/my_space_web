@@ -33,7 +33,7 @@ function Cursor({ position }) {
   return (
     <motion.li
       animate={position}
-      className="absolute z-0 h-9 rounded-full bg-white"
+      className="absolute z-0 h-5 rounded-full bg-white"
     />
   )
 }
@@ -44,7 +44,7 @@ export default function NavHeader() {
   return (
     <div className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
       <ul
-        className="pointer-events-auto relative flex w-fit items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md px-16 py-10 shadow-xl gap-12"
+        className="pointer-events-auto relative flex w-fit items-center rounded-full border border-white/20 bg-black/50 backdrop-blur-md px-8 py-8 shadow-xl gap-12"
         onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
       >
         {TABS.map((tab) => (
