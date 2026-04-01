@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <div className="home-canvas">
       <Canvas
-        camera={{ position: [-3.5, 3.5, 0.5], fov: 72 }}
+        camera={{ position: [4, 3.5, 1.5], fov: 72 }}
         shadows
         gl={{ antialias: true }}
       >
