@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    var path = window.location.pathname.replace('/my_space_web', '');
+    var search = window.location.search;
+    window.location.replace('/my_space_web/?redirect=' + encodeURIComponent(path + search));
+  </script>
+</head>
+<body></body>
+</html>

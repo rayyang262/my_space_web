@@ -4,7 +4,7 @@ import ProjectPage from './pages/ProjectPage'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/my_space_web">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<ProjectPage />} />
