@@ -44,7 +44,7 @@ export default function Scene({ onProjectClick }) {
         minAzimuthAngle={-Math.PI / 4}   // how far left (radians)
         maxAzimuthAngle={Math.PI / 4}  
         minPolarAngle={Math.PI / 4}    // how far up (radians from top)
-        maxPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 4}
       />
 
       <Suspense fallback={<LoadingFallback />}>
