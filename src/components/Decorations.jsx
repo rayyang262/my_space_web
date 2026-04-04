@@ -87,9 +87,9 @@ function Desk({ position }) {
   )
 }
 
-function Chair({ position }) {
+function Chair({ position, rotation }) {
   return (
-    <group position={position}>
+    <group position={position} rotation={rotation}>
       {/* Seat */}
       <mesh position={[0, 0.5, 0]}>
         <boxGeometry args={[0.5, 0.06, 0.5]} />
@@ -119,7 +119,7 @@ export default function Decorations() {
       <Plant position={[4.0, 0.5, 0.8]} />
       <SleepingCat position={[0.5, 0.6, -0.6]} />
       <Desk position={[-2.8, 0.5, -2.0]} />
-      <Chair position={[-2.8, 0.5, -1.2]} />
+      <Chair position={[-2.8, 0.5, -1.2]} rotation={[0, Math.PI, 0]} />
     </>
   )
 }
