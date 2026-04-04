@@ -25,11 +25,21 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
     if (!project.imageSrc) return
     new TextureLoader().load(
       project.imageSrc,
-      (tex) => setTexture(tex),
+      (tex) => {
+        tex.needsUpdate = true
+        setTexture(tex)
+      },
       undefined,
-      () => {} // silently fall back to placeholder on error
+      () => {}
     )
   }, [project.imageSrc])
+
+  useEffect(() => {
+    if (matRef.current && texture) {
+      matRef.current.map = texture
+      matRef.current.needsUpdate = true
+    }
+  }, [texture])
 
   useFrame(() => {
     if (!groupRef.current) return
@@ -49,20 +59,13 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
         onPointerOut={() => { setHovered(false); document.body.style.cursor = 'auto' }}
       >
         <planeGeometry args={[ARTWORK_W, ARTWORK_H]} />
-        {texture ? (
-          <meshStandardMaterial
-            ref={matRef}
-            map={texture}
-            emissive={hovered ? '#f0c060' : '#000000'}
-            emissiveIntensity={hovered ? 0.2 : 0}
-          />
-        ) : (
-          <meshStandardMaterial
-            color={hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length]}
-            emissive={hovered ? '#f0c060' : '#000000'}
-            emissiveIntensity={hovered ? 0.3 : 0}
-          />
-        )}
+        <meshStandardMaterial
+          ref={matRef}
+          color={texture ? '#ffffff' : (hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length])}
+          map={texture || null}
+          emissive={hovered ? '#f0c060' : '#000000'}
+          emissiveIntensity={hovered ? 0.2 : 0}
+        />
       </mesh>
 
       {/* Gold frame border */}
