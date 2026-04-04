@@ -1,6 +1,6 @@
-import { useState, useRef, Suspense } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useTexture } from '@react-three/drei'
+import { TextureLoader } from 'three'
 import { projects } from '../data/projects'
 
 // 2 rows × 3 columns on the staircase (-Z) back wall
@@ -15,30 +15,21 @@ const HOVER_OFFSET = 0.45
 const POSITIONS = ROWS.flatMap(y => COLS.map(x => [x, y, WALL_Z]))
 const CANVAS_COLORS = ['#e8d5b7', '#d4b896', '#c9a87a', '#b8956a', '#d9c4a0', '#c4a882']
 
-function TexturedCanvas({ imageSrc, hovered }) {
-  const texture = useTexture(imageSrc)
-  return (
-    <meshStandardMaterial
-      map={texture}
-      emissive={hovered ? '#f0c060' : '#000000'}
-      emissiveIntensity={hovered ? 0.2 : 0}
-    />
-  )
-}
-
-function PlaceholderCanvas({ hovered, index }) {
-  return (
-    <meshStandardMaterial
-      color={hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length]}
-      emissive={hovered ? '#f0c060' : '#000000'}
-      emissiveIntensity={hovered ? 0.3 : 0}
-    />
-  )
-}
-
 function ArtworkPlane({ project, position, onProjectClick, index }) {
   const [hovered, setHovered] = useState(false)
+  const [texture, setTexture] = useState(null)
   const groupRef = useRef()
+  const matRef = useRef()
+
+  useEffect(() => {
+    if (!project.imageSrc) return
+    new TextureLoader().load(
+      project.imageSrc,
+      (tex) => setTexture(tex),
+      undefined,
+      () => {} // silently fall back to placeholder on error
+    )
+  }, [project.imageSrc])
 
   useFrame(() => {
     if (!groupRef.current) return
@@ -58,12 +49,20 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
         onPointerOut={() => { setHovered(false); document.body.style.cursor = 'auto' }}
       >
         <planeGeometry args={[ARTWORK_W, ARTWORK_H]} />
-        {project.imageSrc
-          ? <Suspense fallback={<PlaceholderCanvas hovered={hovered} index={index} />}>
-              <TexturedCanvas imageSrc={project.imageSrc} hovered={hovered} />
-            </Suspense>
-          : <PlaceholderCanvas hovered={hovered} index={index} />
-        }
+        {texture ? (
+          <meshStandardMaterial
+            ref={matRef}
+            map={texture}
+            emissive={hovered ? '#f0c060' : '#000000'}
+            emissiveIntensity={hovered ? 0.2 : 0}
+          />
+        ) : (
+          <meshStandardMaterial
+            color={hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length]}
+            emissive={hovered ? '#f0c060' : '#000000'}
+            emissiveIntensity={hovered ? 0.3 : 0}
+          />
+        )}
       </mesh>
 
       {/* Gold frame border */}
