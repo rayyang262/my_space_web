@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, Suspense } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { projects } from '../data/projects'
@@ -59,7 +59,9 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
       >
         <planeGeometry args={[ARTWORK_W, ARTWORK_H]} />
         {project.imageSrc
-          ? <TexturedCanvas imageSrc={project.imageSrc} hovered={hovered} />
+          ? <Suspense fallback={<PlaceholderCanvas hovered={hovered} index={index} />}>
+              <TexturedCanvas imageSrc={project.imageSrc} hovered={hovered} />
+            </Suspense>
           : <PlaceholderCanvas hovered={hovered} index={index} />
         }
       </mesh>
