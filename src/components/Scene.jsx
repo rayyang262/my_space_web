@@ -43,6 +43,8 @@ export default function Scene({ onProjectClick }) {
         dampingFactor={0.06}
         minAzimuthAngle={-Math.PI / 4}   // how far left (radians)
         maxAzimuthAngle={Math.PI / 4}  
+        minPolarAngle={Math.PI / 4}    // how far up (radians from top)
+        maxPolarAngle={Math.PI / 2}
       />
 
       <Suspense fallback={<LoadingFallback />}>
