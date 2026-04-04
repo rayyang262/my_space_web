@@ -33,6 +33,16 @@ export default function ProjectPage() {
         <div className="project-meta">
           <h1 className="project-title">{project.title}</h1>
           <span className="project-year">{project.year}</span>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: '#f0c060', fontSize: '13px', fontWeight: 300, letterSpacing: '0.05em', textDecoration: 'none', marginTop: '8px' }}
+            >
+              ↗ View on GitHub
+            </a>
+          )}
         </div>
       </div>
     </div>

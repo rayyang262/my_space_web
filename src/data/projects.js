@@ -12,6 +12,7 @@ export const projects = [
     year: '2026 – Present',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-01.jpg`,
     meshName: 'artwork_project-01',
+    link: 'https://github.com/rayyang262/Badminton_ai',
   },
   {
     id: 'project-02',
