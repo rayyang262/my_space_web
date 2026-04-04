@@ -41,8 +41,8 @@ export default function Scene({ onProjectClick }) {
         enableZoom={false}
         enableDamping
         dampingFactor={0.06}
-        minAzimuthAngle={-Math.PI / 4}   // how far left (radians)
-        maxAzimuthAngle={Math.PI / 4}  
+        minAzimuthAngle={0}   // how far left (radians)
+        maxAzimuthAngle={0}  
       />
 
       <Suspense fallback={<LoadingFallback />}>
