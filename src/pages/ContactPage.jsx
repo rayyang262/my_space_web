@@ -26,6 +26,12 @@ export default function ContactPage() {
             >
               ↗ linkedin.com/in/rayyang26
             </a>
+            <a
+              href="tel:+15512636831"
+              style={{ color: '#aaa', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
+            >
+              📱 +1 (551) 263-6831
+            </a>
           </div>
         </div>
       </div>
