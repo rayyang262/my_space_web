@@ -53,7 +53,7 @@ export default function ArtworkMesh({ mesh, project }) {
             style={{
               background: 'rgba(10,10,10,0.85)',
               color: '#f0c060',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'DM Sans, sans-serif',
               fontSize: '11px',
               fontWeight: 500,
               letterSpacing: '0.08em',
