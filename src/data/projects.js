@@ -8,15 +8,15 @@
 export const projects = [
   {
     id: 'project-01',
-    title: 'Project One',
-    year: '2024',
+    title: 'Badminton AI',
+    year: '2026 – Present',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-01.jpg`,
     meshName: 'artwork_project-01',
   },
   {
     id: 'project-02',
-    title: 'Project Two',
-    year: '2024',
+    title: 'Acer Internship',
+    year: '2025',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-02.jpg`,
     meshName: 'artwork_project-02',
   },

@@ -8,15 +8,18 @@ export default function AboutPage() {
     <div className="project-page">
       <button className="back-btn" onClick={() => navigate('/')}>← Back to Studio</button>
 
-      <div className="project-content" style={{ maxWidth: '640px' }}>
+      <div className="project-content" style={{ maxWidth: '640px', flexDirection: 'column', alignItems: 'flex-start' }}>
         <div className="project-meta" style={{ flexDirection: 'column', gap: '1.5rem' }}>
-          <h1 className="project-title">About</h1>
-          <p style={{ color: '#aaa', lineHeight: '1.8', fontSize: '1rem', fontWeight: 300 }}>
-            Hi, I'm a UX/UI designer passionate about crafting thoughtful digital experiences.
-            This space is where I share my work — feel free to explore.
-          </p>
-          <p style={{ color: '#666', lineHeight: '1.8', fontSize: '0.9rem', fontWeight: 300 }}>
-            ✦ Available for freelance &amp; full-time opportunities.
+          <div>
+            <h1 className="project-title" style={{ fontSize: '28px', marginBottom: '4px' }}>Ray Yang</h1>
+            <p style={{ color: '#f0c060', fontSize: '14px', letterSpacing: '0.08em', fontWeight: 300 }}>UX Focused Designer</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <p style={{ color: '#aaa', fontSize: '14px', fontWeight: 300, letterSpacing: '0.04em' }}>NYU Class of 2028</p>
+            <p style={{ color: '#aaa', fontSize: '14px', fontWeight: 300, letterSpacing: '0.04em' }}>Double major in Interactive Media Arts & Computer Science</p>
+          </div>
+          <p style={{ color: '#555', fontSize: '13px', fontWeight: 300, letterSpacing: '0.05em' }}>
+            ✦ Available for freelance & full-time opportunities
           </p>
         </div>
       </div>

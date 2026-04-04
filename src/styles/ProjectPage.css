@@ -32,30 +32,34 @@
 
 .project-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
   flex: 1;
+  padding-top: 16px;
 }
 
 .project-image-wrap {
-  width: 100%;
-  max-width: 800px;
+  flex: 0 0 65%;
+  max-width: 65%;
   display: flex;
   justify-content: center;
 }
 
 .project-image {
   width: 100%;
-  max-height: 70vh;
+  max-height: 75vh;
   object-fit: contain;
   border-radius: 2px;
 }
 
 .project-meta {
+  flex: 0 0 30%;
   display: flex;
-  align-items: baseline;
-  gap: 20px;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
 }
 
 .project-title {
@@ -74,25 +78,4 @@
 
 .project-not-found {
   gap: 24px;
-}
-
-@media (min-width: 768px) {
-  .project-content {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 32px;
-  }
-
-  .project-image-wrap {
-    flex: 1;
-    max-width: 600px;
-  }
-
-  .project-meta {
-    flex-direction: column;
-    gap: 8px;
-    min-width: 180px;
-    padding-top: 8px;
-  }
 }
