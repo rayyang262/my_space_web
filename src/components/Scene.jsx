@@ -1,9 +1,43 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { OrbitControls } from '@react-three/drei'
+import { TextureLoader, RepeatWrapping } from 'three'
 import PlaceholderScene from './PlaceholderScene'
 import StudioModel from './StudioModel'
 import ArtworkWall from './ArtworkWall'
 import Decorations from './Decorations'
+
+function Floor() {
+  const matRef = useRef()
+  const [texture, setTexture] = useState(null)
+
+  useEffect(() => {
+    new TextureLoader().load(
+      `${import.meta.env.BASE_URL}textures/floor.jpg`,
+      (tex) => {
+        tex.wrapS = tex.wrapT = RepeatWrapping
+        tex.repeat.set(4, 4)
+        tex.needsUpdate = true
+        setTexture(tex)
+      },
+      undefined,
+      () => {} // silently fall back to solid color if no file
+    )
+  }, [])
+
+  useEffect(() => {
+    if (matRef.current && texture) {
+      matRef.current.map = texture
+      matRef.current.needsUpdate = true
+    }
+  }, [texture])
+
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, -2]}>
+      <planeGeometry args={[14, 12]} />
+      <meshStandardMaterial ref={matRef} color="#c8b89a" roughness={0.8} metalness={0.0} />
+    </mesh>
+  )
+}
 
 const USE_GLB = true
 
@@ -46,6 +80,8 @@ export default function Scene({ onProjectClick }) {
         minPolarAngle={Math.PI / 4}    // how far up (radians from top)
         maxPolarAngle={Math.PI / 2}
       />
+
+      <Floor />
 
       <Suspense fallback={<LoadingFallback />}>
         {USE_GLB ? <StudioModel onProjectClick={onProjectClick} /> : <PlaceholderScene onProjectClick={onProjectClick} />}
