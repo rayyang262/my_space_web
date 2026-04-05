@@ -23,10 +23,13 @@ function Sofa({ position, rotation = [0, 0, 0], scale = 1 }) {
 export default function Decorations() {
   return (
     <>
-      <Cat    position={[1.0, 3.5, -2.5]} rotation={[0, -0.5, 0]} scale={0.5} />
-      <Sofa   position={[0.0, 3.5, -3.5]} rotation={[0, 0, 0]}    scale={0.6} />
-      <Plant  position={[-2.0, 3.5, -2.0]} rotation={[0, 0, 0]}   scale={0.5} />
-      <Plant  position={[ 2.5, 3.5, -2.0]} rotation={[0, 0, 0]}   scale={0.5} />
+      {/* Sofa on second floor platform */}
+      <Sofa   position={[-1.5, 3.0, -3.2]} rotation={[0, 0, 0]}      scale={0.35} />
+      {/* Cat on second floor */}
+      <Cat    position={[-0.5, 3.0, -3.5]} rotation={[0, 2.5, 0]}    scale={0.015} />
+      {/* Plants at front corners of second floor */}
+      <Plant  position={[-3.2, 3.0, -1.8]} rotation={[0, 0, 0]}      scale={0.4} />
+      <Plant  position={[ 4.0, 3.0, -0.8]} rotation={[0, 0, 0]}      scale={0.4} />
     </>
   )
 }
