@@ -41,7 +41,7 @@ export default function StudioModel({ onProjectClick }) {
     // Log mesh names to help map to project IDs
     const meshNames = []
     scene.traverse((obj) => { if (obj.isMesh) meshNames.push(obj.name) })
-    console.log('GLB mesh names:', meshNames)
+    console.log('GLB mesh names:', JSON.stringify(meshNames))
   }, [scene])
 
   function handlePointerOver(e) {
