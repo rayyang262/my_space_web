@@ -24,12 +24,12 @@ export default function Decorations() {
   return (
     <>
       {/* Sofa on second floor platform */}
-      <Sofa   position={[-1.5, 3.0, -3.2]} rotation={[0, 0, 0]}      scale={0.35} />
+      <Sofa   position={[-1.5, 3.2, -3.2]} rotation={[2, 0, 0]}      scale={0.35} />
       {/* Cat on second floor */}
-      <Cat    position={[-1.5, 3.0, -3.5]} rotation={[0, 2.5, 0]}    scale={0.015} />
+      <Cat    position={[-1.5, 3.2, -3.5]} rotation={[0, 2.5, 0]}    scale={0.015} />
       {/* Plants at front corners of second floor */}
-      <Plant  position={[-3.2, 3.0, -1.8]} rotation={[0, 0, 0]}      scale={0.4} />
-      <Plant  position={[ 4.0, 3.0, -0.8]} rotation={[0, 0, 0]}      scale={0.4} />
+      <Plant  position={[-3.2, 3.2, -1.8]} rotation={[0, 0, 0]}      scale={0.4} />
+      <Plant  position={[ 4.0, 3.2, -0.8]} rotation={[0, 0, 0]}      scale={0.4} />
     </>
   )
 }
