@@ -1,40 +1,20 @@
-import { Suspense, useEffect, useRef, useState } from 'react'
-import { OrbitControls } from '@react-three/drei'
-import { TextureLoader, RepeatWrapping } from 'three'
+import { Suspense } from 'react'
+import { OrbitControls, useTexture, Text } from '@react-three/drei'
+import { RepeatWrapping } from 'three'
 import PlaceholderScene from './PlaceholderScene'
 import StudioModel from './StudioModel'
 import ArtworkWall from './ArtworkWall'
 import Decorations from './Decorations'
 
-function Floor() {
-  const matRef = useRef()
-  const [texture, setTexture] = useState(null)
-
-  useEffect(() => {
-    new TextureLoader().load(
-      `${import.meta.env.BASE_URL}textures/floor.jpg`,
-      (tex) => {
-        tex.wrapS = tex.wrapT = RepeatWrapping
-        tex.repeat.set(4, 4)
-        tex.needsUpdate = true
-        setTexture(tex)
-      },
-      undefined,
-      () => {} // silently fall back to solid color if no file
-    )
-  }, [])
-
-  useEffect(() => {
-    if (matRef.current && texture) {
-      matRef.current.map = texture
-      matRef.current.needsUpdate = true
-    }
-  }, [texture])
+function Floor({ position = [0, 0.8, -2], size = [14, 12], repeat = [4, 4], rotation = [-Math.PI / 2 + 0.03, 0, 0.04] }) {
+  const texture = useTexture(`${import.meta.env.BASE_URL}textures/floor.jpg`)
+  texture.wrapS = texture.wrapT = RepeatWrapping
+  texture.repeat.set(...repeat)
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, -2]}>
-      <planeGeometry args={[14, 12]} />
-      <meshStandardMaterial ref={matRef} color="#c8b89a" roughness={0.8} metalness={0.0} />
+    <mesh rotation={rotation} position={position} renderOrder={2}>
+      <planeGeometry args={size} />
+      <meshStandardMaterial map={texture} roughness={0.6} polygonOffset polygonOffsetFactor={-4} polygonOffsetUnits={-4} />
     </mesh>
   )
 }
@@ -81,12 +61,26 @@ export default function Scene({ onProjectClick }) {
         maxPolarAngle={Math.PI / 2}
       />
 
-      <Floor />
-
       <Suspense fallback={<LoadingFallback />}>
+        {/* Ground floor */}
+        <Floor position={[0, 0.8, -2]} size={[14, 12]} repeat={[4, 4]} />
+        {/* Second floor loft — smaller rect, stays within platform away from stairs */}
+        <Floor position={[-3.1, 3, 0.4]} size={[4, 6]} repeat={[1.5, 1.5]} />
+        <Floor position={[-3.5, 3.1, -3.2]} size={[2, 2]} repeat={[1.5, 1.5]} />
         {USE_GLB ? <StudioModel onProjectClick={onProjectClick} /> : <PlaceholderScene onProjectClick={onProjectClick} />}
         {USE_GLB && <ArtworkWall onProjectClick={onProjectClick} />}
         <Decorations />
+        {/* Wall title text */}
+        <Text
+          position={[2, 4.6, -4.3]}
+          fontSize={0.35}
+          color="#2a1a0a"
+          anchorX="center"
+          anchorY="middle"
+          letterSpacing={0.05}
+        >
+          MY WORKS
+        </Text>
       </Suspense>
     </>
   )
