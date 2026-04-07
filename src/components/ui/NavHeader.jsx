@@ -59,14 +59,7 @@ export default function NavHeader() {
     return () => { if (shapeTimeoutRef.current) clearTimeout(shapeTimeoutRef.current); };
   }, [isOpen]);
 
-  const logoElement = (
-    <div
-      onClick={() => navigate('/')}
-      style={{ cursor: 'pointer', fontStyle: 'italic', fontWeight: '700', fontSize: '1.25rem', color: '#111111', lineHeight: 1, userSelect: 'none' }}
-    >
-      R
-    </div>
-  );
+
 
   return (
     <header
@@ -75,15 +68,11 @@ export default function NavHeader() {
                   flex flex-col items-center
                   backdrop-blur-sm
                   ${headerShapeClass}
-                  border border-black/10 bg-[#ffffffcc]
+                  border border-black/70 bg-[#ffffff99]
                   w-[calc(100%-2rem)] sm:w-auto
                   transition-[border-radius] duration-300 ease-in-out`}
     >
       <div className="flex items-center justify-between w-full gap-x-6 sm:gap-x-8">
-        <div className="flex items-center">
-          {logoElement}
-        </div>
-
         <nav className="hidden sm:flex items-center space-x-24 text-sm">
           {TABS.map((tab) => (
             <AnimatedNavLink key={tab.href} href={tab.href} offset={tab.offset}>

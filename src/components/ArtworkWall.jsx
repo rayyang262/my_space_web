@@ -45,6 +45,12 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
     if (!groupRef.current) return
     const target = hovered ? HOVER_OFFSET : FLOAT_OFFSET
     groupRef.current.position.z += (position[2] + target - groupRef.current.position.z) * 0.12
+
+    // Scale up smoothly on hover
+    const targetScale = hovered ? 1.18 : 1.0
+    groupRef.current.scale.x += (targetScale - groupRef.current.scale.x) * 0.1
+    groupRef.current.scale.y += (targetScale - groupRef.current.scale.y) * 0.1
+    groupRef.current.scale.z += (targetScale - groupRef.current.scale.z) * 0.1
   })
 
   return (
@@ -61,17 +67,17 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
         <planeGeometry args={[ARTWORK_W, ARTWORK_H]} />
         <meshStandardMaterial
           ref={matRef}
-          color={texture ? '#ffffff' : (hovered ? '#fff8e7' : CANVAS_COLORS[index % CANVAS_COLORS.length])}
+          color={texture ? '#ffffff' : (hovered ? '#ffffff' : CANVAS_COLORS[index % CANVAS_COLORS.length])}
           map={texture || null}
-          emissive={hovered ? '#f0c060' : '#000000'}
-          emissiveIntensity={hovered ? 0.2 : 0}
+          emissive={hovered ? '#ffffff' : '#000000'}
+          emissiveIntensity={hovered ? 0.35 : 0}
         />
       </mesh>
 
       {/* Gold frame border */}
       <mesh position={[0, 0, -0.008]}>
         <planeGeometry args={[ARTWORK_W + 0.07, ARTWORK_H + 0.07]} />
-        <meshStandardMaterial color={hovered ? '#e8c84a' : '#c9a84c'} metalness={0.6} roughness={0.3} />
+        <meshStandardMaterial color={hovered ? '#d4b96a' : '#c9a84c'} metalness={0.6} roughness={0.3} />
       </mesh>
 
       {/* Shadow/depth backing */}
