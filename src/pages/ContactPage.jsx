@@ -1,36 +1,31 @@
-import { useNavigate } from 'react-router-dom'
 import '../styles/ProjectPage.css'
-import { Waves } from '../components/ui/wave-background'
+import ShaderBackground from '../components/ui/shader-background'
 
 export default function ContactPage() {
-  const navigate = useNavigate()
-
   return (
     <div className="project-page" style={{ position: 'relative', overflow: 'hidden' }}>
-      <Waves strokeColor="#ffffff" backgroundColor="#0a0a0a" pointerSize={0} />
+      <ShaderBackground />
 
       {/* Content layer above waves */}
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <button className="back-btn" onClick={() => navigate('/')}>← Back to Studio</button>
-
         <div className="project-content" style={{ maxWidth: '640px', flexDirection: 'column', alignItems: 'flex-start' }}>
           <div
             className="project-meta"
             style={{
               flexDirection: 'column',
               gap: '1.5rem',
-              background: 'rgba(10, 10, 10, 0.55)',
+              background: 'rgba(255, 255, 255, 0.80)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
               borderRadius: '12px',
               padding: '2rem',
             }}
           >
-            <h1 className="project-title" style={{ fontSize: '28px' }}>Contact</h1>
+            <h1 className="project-title" style={{ fontSize: '28px', color: '#111111' }}>Contact</h1>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <a
                 href="mailto:ry2541@nyu.edu"
-                style={{ color: '#e8e0d0', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
+                style={{ color: '#111111', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
               >
                 ✉ ry2541@nyu.edu
               </a>
@@ -38,13 +33,13 @@ export default function ContactPage() {
                 href="https://www.linkedin.com/in/rayyang26/"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: '#aaa', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
+                style={{ color: '#444444', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
               >
                 ↗ linkedin.com/in/rayyang26
               </a>
               <a
                 href="tel:+15512636831"
-                style={{ color: '#aaa', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
+                style={{ color: '#444444', textDecoration: 'none', fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}
               >
                 📱 +1 (551) 263-6831
               </a>

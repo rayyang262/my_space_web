@@ -12,6 +12,6 @@ html, body, #root {
   overflow: hidden;
   background: #0a0a0a;
   color: #e8e0d0;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Miranda Sans', 'Roboto', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
