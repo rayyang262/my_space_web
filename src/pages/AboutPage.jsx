@@ -1,14 +1,36 @@
 import '../styles/ProjectPage.css'
 import ShaderBackground from '../components/ui/shader-background'
 
+const SKILLS = [
+  {
+    icon: '⌨️',
+    title: 'Design Engineer',
+    subtitle: 'Front End',
+    desc: 'I build what I design. Comfortable across React, Three.js, and modern CSS — I close the gap between mockup and production with clean, performant code.',
+  },
+  {
+    icon: '🧠',
+    title: 'UX Designer',
+    subtitle: 'Design Thinking',
+    desc: 'I approach every problem through the lens of human behavior — researching, prototyping, and iterating until the experience feels inevitable.',
+  },
+  {
+    icon: '🌐',
+    title: 'Adaptable',
+    subtitle: 'Cross-Context Skills',
+    desc: 'Raised between Shanghai and New York, I move fluidly across cultures, disciplines, and domains — turning unfamiliar constraints into creative advantages.',
+  },
+]
+
 export default function AboutPage() {
   return (
-    <div className="project-page" style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="project-page" style={{ position: 'relative' }}>
       <ShaderBackground />
 
-      {/* Content layer above waves */}
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <div className="project-content" style={{ maxWidth: '640px', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div className="project-content" style={{ maxWidth: '720px', flexDirection: 'column', alignItems: 'flex-start', gap: '1.5rem' }}>
+
+          {/* Bio panel */}
           <div
             className="project-meta"
             style={{
@@ -19,6 +41,7 @@ export default function AboutPage() {
               WebkitBackdropFilter: 'blur(16px)',
               borderRadius: '12px',
               padding: '2rem',
+              width: '100%',
             }}
           >
             <div>
@@ -41,6 +64,33 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+
+          {/* Skills cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', width: '100%' }}>
+            {SKILLS.map((skill) => (
+              <div
+                key={skill.title}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.80)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  borderRadius: '12px',
+                  padding: '1.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                }}
+              >
+                <span style={{ fontSize: '1.5rem' }}>{skill.icon}</span>
+                <div>
+                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#111', letterSpacing: '0.02em' }}>{skill.title}</p>
+                  <p style={{ fontSize: '12px', color: '#2d6a35', fontWeight: 400, letterSpacing: '0.06em', marginTop: '2px' }}>{skill.subtitle}</p>
+                </div>
+                <p style={{ fontSize: '13px', color: '#444', fontWeight: 300, lineHeight: '1.7', letterSpacing: '0.02em' }}>{skill.desc}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </div>

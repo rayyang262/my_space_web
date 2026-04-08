@@ -3,7 +3,7 @@ import ShaderBackground from '../components/ui/shader-background'
 
 export default function ContactPage() {
   return (
-    <div className="project-page" style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="project-page" style={{ position: 'relative' }}>
       <ShaderBackground />
 
       {/* Content layer above waves */}

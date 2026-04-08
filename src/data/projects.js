@@ -1,10 +1,3 @@
-// Each project has a meshName that must exactly match the object name
-// you give the artwork plane in SketchUp's Outliner panel.
-// Format: artwork_<id>  e.g. "artwork_project-01"
-//
-// Once you export studio.glb and drop it in /public/studio.glb,
-// update meshName here to match what you named each panel in SketchUp.
-
 export const projects = [
   {
     id: 'project-01',
@@ -13,6 +6,27 @@ export const projects = [
     imageSrc: `${import.meta.env.BASE_URL}projects/project-01.jpg`,
     meshName: 'artwork_project-01',
     link: 'https://github.com/rayyang262/Badminton_ai',
+    tags: ['Design Engineer', 'Adaptation Skills'],
+    impact: 'Built real-time badminton performance analysis system',
+    role: 'Designer & Frontend Engineer',
+    duration: '2026 – Present',
+    collaborators: [],
+    problem: 'Badminton players lack real-time feedback on technique. Traditional coaching requires constant presence.',
+    solution: 'AI-powered system using computer vision to analyze shots in real-time with instant feedback.',
+    result: 'Athletes train independently with objective metrics, improving consistency and reducing coaching time.',
+    features: [
+      { title: 'Shot Detection', desc: 'Real-time ML-based identification of different badminton shot types' },
+      { title: 'Form Analysis', desc: 'Computer vision analysis of player posture and movement efficiency' },
+      { title: 'Performance Metrics', desc: 'Velocity, accuracy, and consistency scoring for each shot' },
+      { title: 'Training Dashboard', desc: 'Visual feedback for athletes to review and improve performance' },
+    ],
+    process: [
+      { stage: 'Research', desc: 'Studied badminton biomechanics and identified key performance indicators' },
+      { stage: 'Prototyping', desc: 'Built initial computer vision pipeline for shot detection' },
+      { stage: 'User Testing', desc: 'Validated with local badminton clubs and coaches' },
+      { stage: 'Iteration', desc: 'Refined accuracy and added real-time feedback features' },
+    ],
+    techStack: ['React', 'Three.js', 'Python', 'OpenCV', 'PyTorch', 'WebSocket'],
   },
   {
     id: 'project-02',
@@ -20,6 +34,27 @@ export const projects = [
     year: '2025',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-02.jpg`,
     meshName: 'artwork_project-02',
+    tags: ['UX Designer', 'Design Thinking', 'Adaptation Skills'],
+    impact: 'Redesigned marketing dashboard, increasing engagement by 40%',
+    role: 'UX Designer & Product Designer',
+    duration: '6 months (Summer 2025)',
+    collaborators: ['Marketing Team', 'Data Analytics'],
+    problem: 'Marketing teams struggled tracking campaigns across channels. Dashboard was fragmented and hard to read.',
+    solution: 'Unified dashboard consolidating data from social media, email, and web analytics into one intuitive interface.',
+    result: 'Teams identify high-performing campaigns 3x faster, enabling quicker pivots and better resource allocation.',
+    features: [
+      { title: 'Unified Analytics', desc: 'Single view of all campaign metrics across channels' },
+      { title: 'Smart Filtering', desc: 'AI-powered trend detection for quick insights' },
+      { title: 'Export & Reporting', desc: 'One-click report generation for stakeholders' },
+      { title: 'Collaborative Notes', desc: 'Teams annotate insights and decisions in real-time' },
+    ],
+    process: [
+      { stage: 'User Research', desc: 'Interviews with 15+ marketing managers to understand pain points' },
+      { stage: 'Competitive Analysis', desc: 'Studied HubSpot, Google Analytics, Tableau workflows' },
+      { stage: 'Wireframing', desc: 'Mapped information hierarchy and user flows' },
+      { stage: 'Design & Testing', desc: 'Built interactive prototypes and conducted usability testing' },
+    ],
+    techStack: ['Figma', 'React', 'D3.js', 'Node.js', 'PostgreSQL'],
   },
   {
     id: 'project-03',
@@ -27,6 +62,17 @@ export const projects = [
     year: '2023',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-03.jpg`,
     meshName: 'artwork_project-03',
+    tags: ['Design Engineer'],
+    impact: 'Impact metric TBD',
+    role: 'Role TBD',
+    duration: '2023',
+    collaborators: [],
+    problem: 'Problem statement TBD',
+    solution: 'Solution TBD',
+    result: 'Result TBD',
+    features: [],
+    process: [],
+    techStack: [],
   },
   {
     id: 'project-04',
@@ -34,6 +80,17 @@ export const projects = [
     year: '2023',
     imageSrc: `${import.meta.env.BASE_URL}projects/project-04.jpg`,
     meshName: 'artwork_project-04',
+    tags: ['Design Engineer'],
+    impact: 'Impact metric TBD',
+    role: 'Role TBD',
+    duration: '2023',
+    collaborators: [],
+    problem: 'Problem statement TBD',
+    solution: 'Solution TBD',
+    result: 'Result TBD',
+    features: [],
+    process: [],
+    techStack: [],
   },
   {
     id: 'project-05',
