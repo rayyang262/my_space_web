@@ -47,6 +47,17 @@ export default function ArtworkMesh({ mesh, project }) {
       onPointerOut={handlePointerOut}
       onClick={handleClick}
     >
+      <Html center distanceFactor={10.5} style={{ pointerEvents: 'none' }}>
+        <div
+          className="cursor-target"
+          style={{
+            width: '120px',
+            height: '120px',
+            pointerEvents: 'auto',
+            cursor: 'pointer',
+          }}
+        />
+      </Html>
       {hovered && (
         <Html center distanceFactor={10} style={{ pointerEvents: 'none' }}>
           <div
