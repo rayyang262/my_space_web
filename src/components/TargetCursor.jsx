@@ -53,6 +53,15 @@ const TargetCursor = ({
     const originalCursor = document.body.style.cursor;
     if (hideDefaultCursor) {
       document.body.style.cursor = 'none';
+
+      // Inject global cursor: none style to prevent cursor from reappearing
+      let styleEl = document.getElementById('target-cursor-style');
+      if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'target-cursor-style';
+        styleEl.innerHTML = '* { cursor: none !important; }';
+        document.head.appendChild(styleEl);
+      }
     }
 
     const cursor = cursorRef.current;
@@ -295,6 +304,12 @@ const TargetCursor = ({
 
       spinTl.current?.kill();
       document.body.style.cursor = originalCursor;
+
+      // Remove global cursor: none style if it was added
+      const styleEl = document.getElementById('target-cursor-style');
+      if (styleEl) {
+        styleEl.remove();
+      }
 
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
