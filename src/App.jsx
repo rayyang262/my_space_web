@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import NavHeader from './components/ui/NavHeader'
 import WarpPageTransition from './components/ui/warp-page-transition'
+import TargetCursor from './components/TargetCursor'
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -23,6 +24,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter basename="/my_space_web">
+      <TargetCursor />
       <NavHeader />
       <AnimatedRoutes />
     </BrowserRouter>

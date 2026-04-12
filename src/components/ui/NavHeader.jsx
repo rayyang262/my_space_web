@@ -26,6 +26,7 @@ const AnimatedNavLink = ({ href, children, offset = '0px' }) => {
       onClick={() => navigate(href)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="cursor-target"
       style={{ height: '1.2em', overflow: 'hidden', lineHeight: '1.2em', marginLeft: offset, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
     >
       <div style={{
@@ -82,7 +83,7 @@ export default function NavHeader() {
         </nav>
 
         <button
-          className="sm:hidden flex items-center justify-center w-8 h-8 text-gray-600 focus:outline-none bg-transparent border-none cursor-pointer"
+          className="sm:hidden flex items-center justify-center w-8 h-8 text-gray-600 focus:outline-none bg-transparent border-none cursor-pointer cursor-target"
           onClick={toggleMenu}
           aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
         >
@@ -107,7 +108,7 @@ export default function NavHeader() {
             <button
               key={tab.href}
               onClick={() => { navigate(tab.href); setIsOpen(false); }}
-              className="text-gray-600 hover:text-black transition-colors w-full text-center bg-transparent border-none cursor-pointer text-base"
+              className="text-gray-600 hover:text-black transition-colors w-full text-center bg-transparent border-none cursor-pointer text-base cursor-target"
             >
               {tab.label}
             </button>
