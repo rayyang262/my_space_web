@@ -13,7 +13,6 @@ export default function ArtworkMesh({ mesh, project }) {
   function handlePointerOver(e) {
     e.stopPropagation()
     setHovered(true)
-    document.body.style.cursor = 'pointer'
 
     if (mesh.material) {
       if (!originalColor.current) {
@@ -27,7 +26,6 @@ export default function ArtworkMesh({ mesh, project }) {
   function handlePointerOut(e) {
     e.stopPropagation()
     setHovered(false)
-    document.body.style.cursor = 'auto'
 
     if (mesh.material && originalColor.current !== null) {
       mesh.material.emissive?.setHex(originalColor.current)
