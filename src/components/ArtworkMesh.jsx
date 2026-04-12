@@ -52,7 +52,7 @@ export default function ArtworkMesh({ mesh, project }) {
             width: '120px',
             height: '120px',
             pointerEvents: 'auto',
-            cursor: 'pointer',
+            cursor: 'none',
           }}
         />
       </Html>
