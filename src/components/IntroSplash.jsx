@@ -6,7 +6,9 @@ const INTRO_VIDEO_FILE = 'logo-intro.mp4'
 
 function hasIntroDone() {
   try {
-    return sessionStorage.getItem(INTRO_DONE_KEY) === '1'
+    // Use localStorage so intro only plays once per user (across sessions)
+    // Remove this function entirely if you want intro to play every visit
+    return localStorage.getItem(INTRO_DONE_KEY) === '1'
   } catch {
     return false
   }
@@ -19,7 +21,8 @@ function prefersReducedMotion() {
 
 function markIntroDone() {
   try {
-    sessionStorage.setItem(INTRO_DONE_KEY, '1')
+    // Use localStorage so intro only plays once per user
+    localStorage.setItem(INTRO_DONE_KEY, '1')
   } catch {
     /* ignore quota / private mode */
   }
