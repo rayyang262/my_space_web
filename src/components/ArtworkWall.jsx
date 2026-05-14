@@ -18,6 +18,7 @@ const CANVAS_COLORS = ['#e8d5b7', '#d4b896', '#c9a87a', '#b8956a', '#d9c4a0', '#
 function ArtworkPlane({ project, position, onProjectClick, index }) {
   const [hovered, setHovered] = useState(false)
   const [texture, setTexture] = useState(null)
+  const [scale, setScale] = useState([1, 1])
   const groupRef = useRef()
   const matRef = useRef()
 
@@ -27,6 +28,20 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
       project.imageSrc,
       (tex) => {
         tex.needsUpdate = true
+        // Calculate aspect ratio correction
+        const imageAspect = tex.image.width / tex.image.height
+        const planeAspect = ARTWORK_W / ARTWORK_H
+        let scaleX = 1, scaleY = 1
+
+        if (imageAspect > planeAspect) {
+          // Image is wider, scale down X
+          scaleX = planeAspect / imageAspect
+        } else {
+          // Image is taller, scale down Y
+          scaleY = imageAspect / planeAspect
+        }
+
+        setScale([scaleX, scaleY])
         setTexture(tex)
       },
       undefined,
@@ -37,9 +52,13 @@ function ArtworkPlane({ project, position, onProjectClick, index }) {
   useEffect(() => {
     if (matRef.current && texture) {
       matRef.current.map = texture
+      // Apply aspect ratio correction to texture scaling
+      texture.repeat.set(scale[0], scale[1])
+      // Center the texture
+      texture.offset.set((1 - scale[0]) / 2, (1 - scale[1]) / 2)
       matRef.current.needsUpdate = true
     }
-  }, [texture])
+  }, [texture, scale])
 
   useFrame(() => {
     if (!groupRef.current) return

@@ -6,6 +6,7 @@ import ContactPage from './pages/ContactPage'
 import NavHeader from './components/ui/NavHeader'
 import WarpPageTransition from './components/ui/warp-page-transition'
 import TargetCursor from './components/TargetCursor'
+import IntroSplash from './components/IntroSplash'
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -27,6 +28,7 @@ export default function App() {
       <TargetCursor />
       <NavHeader />
       <AnimatedRoutes />
+      <IntroSplash />
     </BrowserRouter>
   )
 }

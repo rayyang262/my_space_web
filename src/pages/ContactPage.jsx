@@ -1,9 +1,32 @@
 import '../styles/ProjectPage.css'
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack'
+import { Footer } from '../components/ui/footer'
+import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function ContactPage() {
+  const [showFooter, setShowFooter] = useState(false)
+  const footerRef = useRef(null)
+  const sentinelRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowFooter(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <ScrollStack
+    <>
+      <ScrollStack
       itemDistance={120}
       itemScale={0.02}
       itemStackDistance={40}
@@ -70,5 +93,35 @@ export default function ContactPage() {
         </div>
       </ScrollStackItem>
     </ScrollStack>
+
+      <div ref={sentinelRef} style={{ height: '1px', visibility: 'hidden' }} />
+
+      <div
+        ref={footerRef}
+        style={{
+          opacity: showFooter ? 1 : 0,
+          transition: 'opacity 0.3s ease-in-out',
+          pointerEvents: showFooter ? 'auto' : 'none',
+        }}
+      >
+        <Footer
+        logo={<Github className="h-8 w-8" />}
+        brandName="Ray Yang"
+        mainLinks={[
+          { href: "/", label: "Home" },
+          { href: "/about", label: "About" },
+          { href: "/contact", label: "Contact" },
+        ]}
+        legalLinks={[
+          { href: "/privacy", label: "Privacy" },
+          { href: "/terms", label: "Terms" },
+        ]}
+        copyright={{
+          text: "© 2024 Ray Yang",
+          license: "All rights reserved",
+        }}
+        />
+      </div>
+    </>
   )
 }
