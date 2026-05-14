@@ -8,7 +8,7 @@ function hasIntroDone() {
   try {
     return sessionStorage.getItem(INTRO_DONE_KEY) === '1'
   } catch {
-    return true
+    return false
   }
 }
 
@@ -25,25 +25,49 @@ function markIntroDone() {
   }
 }
 
+/** Add ?replayIntro=1 (or ?intro=1) once to clear the session flag and replay. */
+function applyReplayIntroFromQuery() {
+  try {
+    const q = new URLSearchParams(window.location.search)
+    if (q.get('replayIntro') !== '1' && q.get('intro') !== '1') return
+    sessionStorage.removeItem(INTRO_DONE_KEY)
+    const url = new URL(window.location.href)
+    url.searchParams.delete('replayIntro')
+    url.searchParams.delete('intro')
+    const next = url.searchParams.toString()
+    window.history.replaceState(
+      {},
+      '',
+      `${url.pathname}${next ? `?${next}` : ''}${url.hash}`,
+    )
+  } catch {
+    /* ignore */
+  }
+}
+
+function computeInitialVisible() {
+  if (typeof window === 'undefined') return false
+  applyReplayIntroFromQuery()
+  if (hasIntroDone()) return false
+  if (prefersReducedMotion()) {
+    markIntroDone()
+    return false
+  }
+  return true
+}
+
 function videoBaseUrl() {
   const base = import.meta.env.BASE_URL
   return base.endsWith('/') ? base : `${base}/`
 }
 
 export default function IntroSplash() {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === 'undefined') return false
-    if (hasIntroDone()) return false
-    if (prefersReducedMotion()) {
-      markIntroDone()
-      return false
-    }
-    return true
-  })
+  const [visible, setVisible] = useState(computeInitialVisible)
 
   const finishedRef = useRef(false)
   const videoRef = useRef(null)
   const safetyTimerRef = useRef(null)
+  const errorDoneTimerRef = useRef(null)
 
   const finalizeIntro = useCallback(() => {
     if (finishedRef.current) return
@@ -53,8 +77,32 @@ export default function IntroSplash() {
       clearTimeout(safetyTimerRef.current)
       safetyTimerRef.current = null
     }
+    if (errorDoneTimerRef.current) {
+      clearTimeout(errorDoneTimerRef.current)
+      errorDoneTimerRef.current = null
+    }
     setVisible(false)
   }, [])
+
+  const scheduleFinalizeAfterLoadError = useCallback(() => {
+    if (errorDoneTimerRef.current) clearTimeout(errorDoneTimerRef.current)
+    // Delay so React StrictMode's first mount/unmount cycle does not mark "done"
+    // before the real second mount can load the video.
+    errorDoneTimerRef.current = window.setTimeout(() => {
+      errorDoneTimerRef.current = null
+      finalizeIntro()
+    }, 700)
+  }, [finalizeIntro])
+
+  useEffect(
+    () => () => {
+      if (errorDoneTimerRef.current) {
+        clearTimeout(errorDoneTimerRef.current)
+        errorDoneTimerRef.current = null
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
     if (!visible) return
@@ -70,6 +118,10 @@ export default function IntroSplash() {
     }
 
     const onLoadedMeta = () => {
+      if (errorDoneTimerRef.current) {
+        clearTimeout(errorDoneTimerRef.current)
+        errorDoneTimerRef.current = null
+      }
       armSafetyTimeout()
     }
 
@@ -84,6 +136,21 @@ export default function IntroSplash() {
       }
     }
   }, [visible, finalizeIntro])
+
+  useEffect(() => {
+    if (!visible) return
+    const v = videoRef.current
+    if (!v) return
+    const tryPlay = () => {
+      const p = v.play()
+      if (p !== undefined && typeof p.then === 'function') {
+        p.catch(() => {})
+      }
+    }
+    tryPlay()
+    v.addEventListener('canplay', tryPlay, { once: true })
+    return () => v.removeEventListener('canplay', tryPlay)
+  }, [visible])
 
   const srcMp4 = `${videoBaseUrl()}intro/${INTRO_VIDEO_FILE}`
 
@@ -116,7 +183,7 @@ export default function IntroSplash() {
               preload="auto"
               aria-label="Site introduction"
               onEnded={finalizeIntro}
-              onError={finalizeIntro}
+              onError={scheduleFinalizeAfterLoadError}
             />
           </motion.div>
 
